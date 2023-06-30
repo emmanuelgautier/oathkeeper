@@ -1,0 +1,104 @@
+{
+  "Initial": "AQAAAA7XLSJwNNKg+AA8",
+  "Version": "0.2",
+  "Converter": {
+    "ClearHeaders": [
+      "^X-Goog-.*Encryption-Key$",
+      "^X-Amz-Date$",
+      "^User-Agent$"
+    ],
+    "RemoveRequestHeaders": [
+      "^Authorization$",
+      "^Proxy-Authorization$",
+      "^Connection$",
+      "^Content-Type$",
+      "^Date$",
+      "^Host$",
+      "^Transfer-Encoding$",
+      "^Via$",
+      "^X-Forwarded-.*$",
+      "^X-Cloud-Trace-Context$",
+      "^X-Goog-Api-Client$",
+      "^X-Google-.*$",
+      "^X-Gfe-.*$",
+      "^Authorization$",
+      "^Duration$",
+      "^X-Amz-Security-Token$"
+    ],
+    "RemoveResponseHeaders": [
+      "^X-Google-.*$",
+      "^X-Gfe-.*$"
+    ],
+    "ClearParams": [
+      "^X-Amz-Date$"
+    ],
+    "RemoveParams": [
+      "^X-Amz-Credential$",
+      "^X-Amz-Signature$",
+      "^X-Amz-Security-Token$"
+    ]
+  },
+  "Entries": [
+    {
+      "ID": "1ec246d4ab870d0b",
+      "Request": {
+        "Method": "GET",
+        "URL": "https://oathkeeper-test-bucket.s3.us-west-1.amazonaws.com/path/prefix/rules.json",
+        "Header": {
+          "Accept-Encoding": [
+            "gzip"
+          ],
+          "User-Agent": [
+            "CLEARED"
+          ],
+          "X-Amz-Content-Sha256": [
+            "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          ],
+          "X-Amz-Date": [
+            "CLEARED"
+          ]
+        },
+        "MediaType": "",
+        "BodyParts": [
+          ""
+        ]
+      },
+      "Response": {
+        "StatusCode": 200,
+        "Proto": "HTTP/1.1",
+        "ProtoMajor": 1,
+        "ProtoMinor": 1,
+        "Header": {
+          "Accept-Ranges": [
+            "bytes"
+          ],
+          "Content-Length": [
+            "1731"
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Thu, 29 Oct 2020 20:52:03 GMT"
+          ],
+          "Etag": [
+            "\"4d4080da997d64e15e79c4502c007658\""
+          ],
+          "Last-Modified": [
+            "Thu, 29 Oct 2020 18:59:57 GMT"
+          ],
+          "Server": [
+            "AmazonS3"
+          ],
+          "X-Amz-Id-2": [
+            "jtbwJNeH1jR+27Ti6/TbQD7SPnF6C/1Zanu/8b0eyOO6ux5oDgaflxl2Qly4jsfmDCLQk4GN9og="
+          ],
+          "X-Amz-Request-Id": [
+            "04E47FBC8B12B935"
+          ]
+        },
+        "Body": "WwogIHsKICAgICJpZCI6ICJ0ZXN0LXJ1bGUtMSIsCiAgICAidXBzdHJlYW0iOiB7CiAgICAgICJwcmVzZXJ2ZV9ob3N0IjogdHJ1ZSwKICAgICAgInN0cmlwX3BhdGgiOiAiL2FwaSIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9teWJhY2tlbmQuY29tL2FwaSIKICAgIH0sCiAgICAibWF0Y2giOiB7CiAgICAgICJ1cmwiOiAibXlwcm94eS5jb20vYXBpIiwKICAgICAgIm1ldGhvZHMiOiBbCiAgICAgICAgIkdFVCIsCiAgICAgICAgIlBPU1QiCiAgICAgIF0KICAgIH0sCiAgICAiYXV0aGVudGljYXRvcnMiOiBbCiAgICAgIHsKICAgICAgICAiaGFuZGxlciI6ICJub29wIgogICAgICB9LAogICAgICB7CiAgICAgICAgImhhbmRsZXIiOiAiYW5vbnltb3VzIgogICAgICB9CiAgICBdLAogICAgImF1dGhvcml6ZXIiOiB7CiAgICAgICJoYW5kbGVyIjogImFsbG93IgogICAgfSwKICAgICJtdXRhdG9ycyI6IFsKICAgICAgewogICAgICAgICJoYW5kbGVyIjogIm5vb3AiCiAgICAgIH0KICAgIF0KICB9LAogIHsKICAgICJpZCI6ICJ0ZXN0LXJ1bGUtMiIsCiAgICAidXBzdHJlYW0iOiB7CiAgICAgICJwcmVzZXJ2ZV9ob3N0IjogdHJ1ZSwKICAgICAgInN0cmlwX3BhdGgiOiAiL2FwaSIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9teWJhY2tlbmQuY29tL2FwaSIKICAgIH0sCiAgICAibWF0Y2giOiB7CiAgICAgICJ1cmwiOiAibXlwcm94eS5jb20vYXBpIiwKICAgICAgIm1ldGhvZHMiOiBbCiAgICAgICAgIkdFVCIsCiAgICAgICAgIlBPU1QiCiAgICAgIF0KICAgIH0sCiAgICAiYXV0aGVudGljYXRvcnMiOiBbCiAgICAgIHsKICAgICAgICAiaGFuZGxlciI6ICJub29wIgogICAgICB9LAogICAgICB7CiAgICAgICAgImhhbmRsZXIiOiAiYW5vbnltb3VzIgogICAgICB9CiAgICBdLAogICAgImF1dGhvcml6ZXIiOiB7CiAgICAgICJoYW5kbGVyIjogImRlbnkiCiAgICB9LAogICAgIm11dGF0b3JzIjogWwogICAgICB7CiAgICAgICAgImhhbmRsZXIiOiAiaWRfdG9rZW4iCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiaGFuZGxlciI6ICJoZWFkZXIiLAogICAgICAgICJjb25maWciOiB7CiAgICAgICAgICAiaGVhZGVycyI6IHsKICAgICAgICAgICAgIlgtVXNlciI6ICJ7eyBwcmludCAuU3ViamVjdCB9fSIKICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIH0KICAgIF0KICB9LAogIHsKICAgICJpZCI6ICJ0ZXN0LXJ1bGUtMyIsCiAgICAidXBzdHJlYW0iOiB7CiAgICAgICJwcmVzZXJ2ZV9ob3N0IjogdHJ1ZSwKICAgICAgInN0cmlwX3BhdGgiOiAiL2FwaSIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9teWJhY2tlbmQuY29tL2FwaSIKICAgIH0sCiAgICAibWF0Y2giOiB7CiAgICAgICJ1cmwiOiAibXlwcm94eS5jb20vYXBpIiwKICAgICAgIm1ldGhvZHMiOiBbCiAgICAgICAgIkdFVCIsCiAgICAgICAgIlBPU1QiCiAgICAgIF0KICAgIH0sCiAgICAiYXV0aGVudGljYXRvcnMiOiBbCiAgICAgIHsKICAgICAgICAiaGFuZGxlciI6ICJub29wIgogICAgICB9LAogICAgICB7CiAgICAgICAgImhhbmRsZXIiOiAiYW5vbnltb3VzIgogICAgICB9CiAgICBdLAogICAgImF1dGhvcml6ZXIiOiB7CiAgICAgICJoYW5kbGVyIjogImFsbG93IgogICAgfSwKICAgICJtdXRhdG9ycyI6IFsKICAgICAgewogICAgICAgICJoYW5kbGVyIjogImlkX3Rva2VuIiwKICAgICAgICAiY29uZmlnIjogewogICAgICAgICAgImp3a3NfdXJsIjogImh0dHA6Ly9zdHViLyIKICAgICAgICB9CiAgICAgIH0KICAgIF0KICB9Cl0="
+      }
+    }
+  ]
+}

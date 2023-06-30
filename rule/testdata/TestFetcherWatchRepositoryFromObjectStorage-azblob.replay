@@ -1,0 +1,120 @@
+{
+  "Initial": "AQAAAA7XLSJxBnTNMAA8",
+  "Version": "0.2",
+  "Converter": {
+    "ClearHeaders": [
+      "^X-Goog-.*Encryption-Key$",
+      "^X-Ms-Date$",
+      "^User-Agent$"
+    ],
+    "RemoveRequestHeaders": [
+      "^Authorization$",
+      "^Proxy-Authorization$",
+      "^Connection$",
+      "^Content-Type$",
+      "^Date$",
+      "^Host$",
+      "^Transfer-Encoding$",
+      "^Via$",
+      "^X-Forwarded-.*$",
+      "^X-Cloud-Trace-Context$",
+      "^X-Goog-Api-Client$",
+      "^X-Google-.*$",
+      "^X-Gfe-.*$"
+    ],
+    "RemoveResponseHeaders": [
+      "^X-Google-.*$",
+      "^X-Gfe-.*$"
+    ],
+    "ClearParams": null,
+    "RemoveParams": [
+      "^se$",
+      "^sig$",
+      "^X-Ms-Date$"
+    ]
+  },
+  "Entries": [
+    {
+      "ID": "caa57ec2301d5ac2",
+      "Request": {
+        "Method": "GET",
+        "URL": "https://oathkeepertestbucket.blob.core.windows.net/path/prefix/rules.json",
+        "Header": {
+          "Accept-Encoding": [
+            "gzip"
+          ],
+          "User-Agent": [
+            "CLEARED"
+          ],
+          "X-Ms-Date": [
+            "CLEARED"
+          ],
+          "X-Ms-Version": [
+            "2018-11-09"
+          ]
+        },
+        "MediaType": "",
+        "BodyParts": [
+          ""
+        ]
+      },
+      "Response": {
+        "StatusCode": 200,
+        "Proto": "HTTP/1.1",
+        "ProtoMajor": 1,
+        "ProtoMinor": 1,
+        "Header": {
+          "Accept-Ranges": [
+            "bytes"
+          ],
+          "Content-Disposition": [
+            ""
+          ],
+          "Content-Length": [
+            "1731"
+          ],
+          "Content-Md5": [
+            "TUCA2pl9ZOFeecRQLAB2WA=="
+          ],
+          "Content-Type": [
+            "application/json"
+          ],
+          "Date": [
+            "Thu, 29 Oct 2020 20:52:01 GMT"
+          ],
+          "Etag": [
+            "\"0x8D87C3CA3B97FAF\""
+          ],
+          "Last-Modified": [
+            "Thu, 29 Oct 2020 18:58:35 GMT"
+          ],
+          "Server": [
+            "Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0"
+          ],
+          "X-Ms-Blob-Type": [
+            "BlockBlob"
+          ],
+          "X-Ms-Creation-Time": [
+            "Thu, 29 Oct 2020 18:58:35 GMT"
+          ],
+          "X-Ms-Lease-State": [
+            "available"
+          ],
+          "X-Ms-Lease-Status": [
+            "unlocked"
+          ],
+          "X-Ms-Request-Id": [
+            "552579fe-601e-0006-7435-aee110000000"
+          ],
+          "X-Ms-Server-Encrypted": [
+            "true"
+          ],
+          "X-Ms-Version": [
+            "2018-11-09"
+          ]
+        },
+        "Body": "WwogIHsKICAgICJpZCI6ICJ0ZXN0LXJ1bGUtMSIsCiAgICAidXBzdHJlYW0iOiB7CiAgICAgICJwcmVzZXJ2ZV9ob3N0IjogdHJ1ZSwKICAgICAgInN0cmlwX3BhdGgiOiAiL2FwaSIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9teWJhY2tlbmQuY29tL2FwaSIKICAgIH0sCiAgICAibWF0Y2giOiB7CiAgICAgICJ1cmwiOiAibXlwcm94eS5jb20vYXBpIiwKICAgICAgIm1ldGhvZHMiOiBbCiAgICAgICAgIkdFVCIsCiAgICAgICAgIlBPU1QiCiAgICAgIF0KICAgIH0sCiAgICAiYXV0aGVudGljYXRvcnMiOiBbCiAgICAgIHsKICAgICAgICAiaGFuZGxlciI6ICJub29wIgogICAgICB9LAogICAgICB7CiAgICAgICAgImhhbmRsZXIiOiAiYW5vbnltb3VzIgogICAgICB9CiAgICBdLAogICAgImF1dGhvcml6ZXIiOiB7CiAgICAgICJoYW5kbGVyIjogImFsbG93IgogICAgfSwKICAgICJtdXRhdG9ycyI6IFsKICAgICAgewogICAgICAgICJoYW5kbGVyIjogIm5vb3AiCiAgICAgIH0KICAgIF0KICB9LAogIHsKICAgICJpZCI6ICJ0ZXN0LXJ1bGUtMiIsCiAgICAidXBzdHJlYW0iOiB7CiAgICAgICJwcmVzZXJ2ZV9ob3N0IjogdHJ1ZSwKICAgICAgInN0cmlwX3BhdGgiOiAiL2FwaSIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9teWJhY2tlbmQuY29tL2FwaSIKICAgIH0sCiAgICAibWF0Y2giOiB7CiAgICAgICJ1cmwiOiAibXlwcm94eS5jb20vYXBpIiwKICAgICAgIm1ldGhvZHMiOiBbCiAgICAgICAgIkdFVCIsCiAgICAgICAgIlBPU1QiCiAgICAgIF0KICAgIH0sCiAgICAiYXV0aGVudGljYXRvcnMiOiBbCiAgICAgIHsKICAgICAgICAiaGFuZGxlciI6ICJub29wIgogICAgICB9LAogICAgICB7CiAgICAgICAgImhhbmRsZXIiOiAiYW5vbnltb3VzIgogICAgICB9CiAgICBdLAogICAgImF1dGhvcml6ZXIiOiB7CiAgICAgICJoYW5kbGVyIjogImRlbnkiCiAgICB9LAogICAgIm11dGF0b3JzIjogWwogICAgICB7CiAgICAgICAgImhhbmRsZXIiOiAiaWRfdG9rZW4iCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiaGFuZGxlciI6ICJoZWFkZXIiLAogICAgICAgICJjb25maWciOiB7CiAgICAgICAgICAiaGVhZGVycyI6IHsKICAgICAgICAgICAgIlgtVXNlciI6ICJ7eyBwcmludCAuU3ViamVjdCB9fSIKICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIH0KICAgIF0KICB9LAogIHsKICAgICJpZCI6ICJ0ZXN0LXJ1bGUtMyIsCiAgICAidXBzdHJlYW0iOiB7CiAgICAgICJwcmVzZXJ2ZV9ob3N0IjogdHJ1ZSwKICAgICAgInN0cmlwX3BhdGgiOiAiL2FwaSIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9teWJhY2tlbmQuY29tL2FwaSIKICAgIH0sCiAgICAibWF0Y2giOiB7CiAgICAgICJ1cmwiOiAibXlwcm94eS5jb20vYXBpIiwKICAgICAgIm1ldGhvZHMiOiBbCiAgICAgICAgIkdFVCIsCiAgICAgICAgIlBPU1QiCiAgICAgIF0KICAgIH0sCiAgICAiYXV0aGVudGljYXRvcnMiOiBbCiAgICAgIHsKICAgICAgICAiaGFuZGxlciI6ICJub29wIgogICAgICB9LAogICAgICB7CiAgICAgICAgImhhbmRsZXIiOiAiYW5vbnltb3VzIgogICAgICB9CiAgICBdLAogICAgImF1dGhvcml6ZXIiOiB7CiAgICAgICJoYW5kbGVyIjogImFsbG93IgogICAgfSwKICAgICJtdXRhdG9ycyI6IFsKICAgICAgewogICAgICAgICJoYW5kbGVyIjogImlkX3Rva2VuIiwKICAgICAgICAiY29uZmlnIjogewogICAgICAgICAgImp3a3NfdXJsIjogImh0dHA6Ly9zdHViLyIKICAgICAgICB9CiAgICAgIH0KICAgIF0KICB9Cl0="
+      }
+    }
+  ]
+}

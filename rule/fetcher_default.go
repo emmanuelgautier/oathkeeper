@@ -46,6 +46,7 @@ type FetcherDefault struct {
 	mux      *blob.URLMux
 
 	cache          map[string][]Rule
+	modTimeCache   map[string]time.Time
 	cancelWatchers map[string]context.CancelFunc
 	events         chan watcherx.Event
 
@@ -86,8 +87,8 @@ func splitLocalRemoteRepos(ruleRepos []url.URL) (files []string, nonFiles []url.
 	return files, nonFiles
 }
 
-// watchLocalFiles watches all files that are configured in the config and are not watched already.
-// It also cancels watchers for files that are no longer configured. This function is idempotent.
+// watchLocalFiles watches all local files that are configured in the config and are not watched already.
+// It also cancels watchers for local files that are no longer configured. This function is idempotent.
 func (f *FetcherDefault) watchLocalFiles(ctx context.Context) {
 	f.lock.Lock()
 
@@ -152,6 +153,16 @@ func (f *FetcherDefault) Watch(ctx context.Context) error {
 		return repos
 	}
 
+	processRemoteRepos := func(remoteRepos map[url.URL]struct{}, newRemoteRepos map[url.URL]struct{}) error {
+		if err := f.processRemoteRepoUpdate(ctx, remoteRepos, newRemoteRepos); err != nil {
+			f.registry.Logger().WithError(err).Error("Unable to update remote access rule repository config.")
+
+			return err
+		}
+
+		return nil
+	}
+
 	// capture the previous config values to detect changes, and trigger initial processing
 	strategy := f.config.AccessRuleMatchingStrategy()
 	if err := f.processStrategyUpdate(ctx, strategy); err != nil {
@@ -182,11 +193,24 @@ func (f *FetcherDefault) Watch(ctx context.Context) error {
 
 		// update & fetch the remote repos if they changed
 		newRemoteRepos := getRemoteRepos()
-		if err := f.processRemoteRepoUpdate(ctx, remoteRepos, newRemoteRepos); err != nil {
-			f.registry.Logger().WithError(err).Error("Unable to update remote access rule repository config.")
-		}
+		processRemoteRepos(remoteRepos, newRemoteRepos)
+
 		remoteRepos = newRemoteRepos
 	})
+
+	ticker := time.NewTicker(5 * time.Second)
+	quit := make(chan struct{})
+	go func() {
+		for {
+			select {
+			case <-ticker.C:
+				processRemoteRepos(remoteRepos, remoteRepos)
+			case <-quit:
+				ticker.Stop()
+				return
+			}
+		}
+	}()
 
 	go f.processLocalUpdates(ctx)
 	return nil
@@ -213,6 +237,14 @@ func (f *FetcherDefault) processRemoteRepoUpdate(ctx context.Context, oldRepos, 
 			}
 			f.cacheRules(repo.String(), rules)
 		}
+
+		modTime, err := f.fetchObjectModTimeFromStorage(repo)
+		if err != nil {
+			f.registry.Logger().WithError(err).WithField("repo", repo.String()).Error("Unable to fetch mod time.")
+			return err
+		}
+
+		f.modTimeCache[repo.String()] = modTime
 	}
 	for repo := range oldRepos {
 		if _, ok := newRepos[repo]; !ok {
@@ -343,7 +375,7 @@ func (f *FetcherDefault) decode(r io.Reader) ([]Rule, error) {
 	return ks, nil
 }
 
-func (f *FetcherDefault) fetchFromStorage(source url.URL) ([]Rule, error) {
+func (f *FetcherDefault) newStorageBucketReader(source url.URL) (*blob.Reader, error) {
 	ctx := context.Background()
 	bucket, err := f.mux.OpenBucket(ctx, source.Scheme+"://"+source.Host)
 	if err != nil {
@@ -357,5 +389,23 @@ func (f *FetcherDefault) fetchFromStorage(source url.URL) ([]Rule, error) {
 	}
 	defer r.Close()
 
+	return r, nil
+}
+
+func (f *FetcherDefault) fetchFromStorage(source url.URL) ([]Rule, error) {
+	r, err := f.newStorageBucketReader(source)
+	if err != nil {
+		return nil, err
+	}
+
 	return f.decode(r)
+}
+
+func (f *FetcherDefault) fetchObjectModTimeFromStorage(source url.URL) (time.Time, error) {
+	r, err := f.newStorageBucketReader(source)
+	if err != nil {
+		return time.Time{}, err
+	}
+
+	return r.ModTime(), nil
 }

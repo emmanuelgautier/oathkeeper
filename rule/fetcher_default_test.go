@@ -487,6 +487,52 @@ authorizers:
 mutators:
   noop: { enabled: true }
   header: { enabled: true }
+  id_token:
+    enabled: true
+    config:
+      jwks_url: https://stub/.well-known/jwks.json
+      issuer_url: https://stub
+
+access_rules:
+  repositories:
+  - s3://oathkeeper-test-bucket/path/prefix/rules.json
+  - gs://oathkeeper-test-bucket/path/prefix/rules.json
+  - azblob://path/prefix/rules.json
+`)
+	require.NoError(t, configFile.Sync())
+
+	conf := internal.NewConfigurationWithDefaults(
+		configx.SkipValidation(),
+		configx.WithContext(ctx),
+		configx.WithLogger(logrusx.New("", "", logrusx.ForceLevel(logrus.TraceLevel))),
+		configx.WithConfigFiles(configFile.Name()),
+	)
+	r := internal.NewRegistry(conf)
+	r.RuleFetcher().(rule.URLMuxSetter).SetURLMux(cloudstorage.NewTestURLMux(t))
+
+	go func() {
+		require.NoError(t, r.RuleFetcher().Watch(ctx))
+	}()
+
+	eventuallyListRules(ctx, t, r, 9)
+}
+
+func TestFetcherWatchRepositoryFromObjectStorage(t *testing.T) {
+	t.Parallel()
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	configFile, _ := os.CreateTemp(t.TempDir(), ".oathkeeper-*.yml")
+	configFile.WriteString(`
+authenticators:
+  noop: { enabled: true }
+  anonymous: { enabled: true }
+authorizers:
+  allow: { enabled: true }
+  deny: { enabled: true }
+mutators:
+  noop: { enabled: true }
+  header: { enabled: true }
   id_token: 
     enabled: true
     config:
